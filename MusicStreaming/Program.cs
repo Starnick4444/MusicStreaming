@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Data.SqlTypes;
+using System.Net;
 using System.Net.Sockets;
 
 namespace MusicStreamingServer
@@ -7,8 +8,9 @@ namespace MusicStreamingServer
     {
         static void Main(string[] args)
         {
+            List<Music> asd = MusicMapper.MapFolder(@"").ToList();
             TcpListener server = null;
-
+            
             try
             {
                 //set TcpListener on port, TODO: make it a config
