@@ -9,12 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Network\" />
+    <PackageReference Include="CodeArtEng.Tcp" Version="5.1.1" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CodeArtEng.Tcp" Version="5.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+    <EditorConfigFiles Remove="D:\Coding\C#\MusicStreaming\MusicStreaming\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="D:\Coding\C#\MusicStreaming\MusicStreaming\.editorconfig" />
   </ItemGroup>
 
 </Project>
