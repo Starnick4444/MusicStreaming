@@ -2,6 +2,7 @@
 using System;
 using MusicStreamingServer.Network;
 using System.Configuration;
+using MusicStreamingServer.Models;
 
 namespace MusicStreamingServer
 {
