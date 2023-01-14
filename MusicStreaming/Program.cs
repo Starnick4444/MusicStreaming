@@ -1,51 +1,47 @@
-﻿using System.Data.SqlTypes;
-using System.Net;
-using System.Net.Sockets;
+﻿using CodeArtEng.Tcp;
 
 namespace MusicStreamingServer
 {
     internal class Program
     {
+        static TcpServer Server;
+        static TcpAppServer AppServer;
+
         static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
             List<Music> asd = MusicMapper.MapFolder(@"").ToList();
-            TcpListener server = null;
+            Server = new TcpServer("MusicServer");
+            Server.MaxClients = 10;
+            Server.ClientConnected += Server_ClientConnected;
+            Server.ClientDisconnected += Server_ClientDisconnected;
+            //TODO start with a port
+
+            AppServer = new TcpAppServer()
             
-            try
-            {
-                //set TcpListener on port, TODO: make it a config
-                Int32 port = 9155;
+        }
 
-                server = new TcpListener(IPAddress.Any, port);
+        private static void OnProcessExit(object? sender, EventArgs e)
+        {
+            Server.Stop(); Server.Dispose();
+            throw new NotImplementedException();
+        }
 
-                //starting server
-                server.Start();
+        private static void Server_ClientDisconnected(object? sender, TcpServerEventArgs e)
+        {
+            throw new NotImplementedException();
+            //TODO disconnected logging
+            //((TcpServerConnection)e.Client).ClientIPAddress
+        }
 
-                byte[] bytes = new byte[1024];
-                string data = null;
+        private static void Server_ClientConnected(object? sender, TcpServerEventArgs e)
+        {
+;
+            throw new NotImplementedException();
+            //TODO: subscribe to e.client. MessageRecieved, BytesRecieved, BytesSent
 
-                while (true)
-                {
-                    Console.WriteLine("Waiting for Connection...");
-
-                    using TcpClient client = server.AcceptTcpClient();
-                    Console.WriteLine("Client connected!");
-
-                    data = null;
-
-                    //Get stream object for reading and writing
-                    NetworkStream networkStream = client.GetStream();
-
-                }
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            }
-            finally
-            {
-                server.Stop();
-            }
+            //TODO: connected logging
+            //((TcpServerConnection)e.Client).ClientIPAddress
         }
     }
 }
