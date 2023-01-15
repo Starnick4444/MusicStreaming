@@ -10,14 +10,14 @@ namespace MusicStreamingServer;
 
 internal class MusicMapper
 {
-    private static Music map(string path)
+    private static MusicModel map(string path)
     {
-        return new Music(new FileInfo(path));
+        return new MusicModel(new FileInfo(path));
     }
 
-    public static IEnumerable<Music> MapFolder(string path)
+    public static IEnumerable<MusicModel> MapFolder(string path)
     {
-        List<Music> list = new List<Music>();
+        List<MusicModel> list = new List<MusicModel>();
 
         foreach (string filePath in Directory.GetFiles(path))
         {
@@ -27,9 +27,9 @@ internal class MusicMapper
         return list;
     }
 
-    public static IEnumerable<Music> MapFolder2(string path)
+    public static IEnumerable<MusicModel> MapFolder2(string path)
     {
-        List<Music> list = new List<Music>();
+        List<MusicModel> list = new List<MusicModel>();
 
         foreach (string filePath in Directory.GetFiles(path))
         {

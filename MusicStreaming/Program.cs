@@ -16,14 +16,17 @@ namespace MusicStreamingServer
             //Stopping server and disposing of it at close
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
 
-            //Local list of available music, REMOVE THIS, use database
-            List<Music> asd = MusicMapper.MapFolder($"").ToList();
+            //Local list of available music, TODO REMOVE THIS, use database
+            List<MusicModel> asd = MusicMapper.MapFolder($"").ToList();
 
             //initializing Tcp server
             Server = TcpServerManager.StartServer();
 
             //initializing TcpApp server
             AppServer = TcpAppServerManager.StartServer();
+
+            //TODO find out how to find serverclient on appserver request, (maybe pair them with dictionary on join?, or ip/port)
+            //TODO block this so it doesnt exit
         }
 
         private static void OnProcessExit(object? sender, EventArgs e)

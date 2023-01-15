@@ -64,5 +64,7 @@
     <Build Include="dbo\Tables\Music.sql" />
     <Build Include="dbo\StoredProcedures\spMusic_GetAllTitle.sql" />
     <Build Include="dbo\StoredProcedures\spMusic_Insert.sql" />
+    <Build Include="dbo\StoredProcedures\spMusic_GetAll.sql" />
+    <Build Include="dbo\StoredProcedures\spMusic_Get.sql" />
   </ItemGroup>
 </Project>
