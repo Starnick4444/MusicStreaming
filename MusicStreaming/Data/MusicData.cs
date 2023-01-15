@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MusicStreamingServer.Data;
-internal class MusicData
+internal class MusicData : IMusicData
 {
     private readonly ISqlDataAccess _db;
 
@@ -24,11 +24,11 @@ internal class MusicData
         return result.FirstOrDefault();
     }
 
-    //TODO Sql insert
     public Task InsertMusic(MusicModel music) => _db.SaveData("dbo.spMusic_Insert", music);
 
-    //TODO Sql update
     public Task UpdateMusic(MusicModel music) => _db.SaveData("dbo.spMusic_Update", music);
 
     public Task DeleteMusic(string title) => _db.SaveData("dbo.spMusic_Delete", new { Title = title });
+
+    public Task<IEnumerable<string>> GetAllTitle() => _db.LoadData<string, dynamic>("dbo.spMusic_GetAllTitle", new { });
 }

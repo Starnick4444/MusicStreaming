@@ -30,9 +30,10 @@ namespace MusicStreamingServer.Network
 
         private static void Server_ClientConnected(object? sender, TcpServerEventArgs e)
         {
-            ;
             throw new NotImplementedException();
             //TODO: subscribe to e.client. MessageRecieved, BytesRecieved, BytesSent
+
+            //TODO: create class that holds both client objects to this device, client will send the same unique iq on both connection
 
             //TODO: connected logging
             //((TcpServerConnection)e.Client).ClientIPAddress

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Configuration;
 using System.Data.SqlClient;
 using Dapper;
 using System.Data;
@@ -8,11 +8,10 @@ namespace MusicStreamingServer.DbAccess;
 
 public class SqlDataAccess : ISqlDataAccess
 {
-    private readonly IConfiguration _config;
 
-    public SqlDataAccess(IConfiguration config)
+    public SqlDataAccess()
     {
-        _config = config;
+
     }
 
     public async Task<IEnumerable<T>> LoadData<T, U>(
@@ -20,7 +19,7 @@ public class SqlDataAccess : ISqlDataAccess
         U parameters,
         string connectionId = "Default")
     {
-        using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
+        using IDbConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[connectionId].ConnectionString);
 
         return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
     }
@@ -30,7 +29,7 @@ public class SqlDataAccess : ISqlDataAccess
         T parameters,
         string connectionId = "Default")
     {
-        using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
+        using IDbConnection connection = new SqlConnection("_config.GetConnectionString(connectionId)");
 
         await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
     }

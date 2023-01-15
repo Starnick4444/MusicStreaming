@@ -22,7 +22,6 @@ namespace MusicStreamingServer.Network
             _appServer.ClientSigningOut += _appServer_ClientSigningOut; //might not need
             //TODO start with a port
             //TOOD register new commands
-            _appServer.RegisterCommand()
             return _appServer;
         }
 

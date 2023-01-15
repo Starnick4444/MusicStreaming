@@ -3,6 +3,7 @@ using System;
 using MusicStreamingServer.Network;
 using System.Configuration;
 using MusicStreamingServer.Models;
+//using Microsoft.Extensions.Configuration;
 
 namespace MusicStreamingServer
 {
@@ -17,7 +18,7 @@ namespace MusicStreamingServer
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
 
             //Local list of available music, TODO REMOVE THIS, use database
-            List<MusicModel> asd = MusicMapper.MapFolder($"").ToList();
+            MusicMapper.MapFolder(@"");
 
             //initializing Tcp server
             Server = TcpServerManager.StartServer();
@@ -25,8 +26,9 @@ namespace MusicStreamingServer
             //initializing TcpApp server
             AppServer = TcpAppServerManager.StartServer();
 
-            //TODO find out how to find serverclient on appserver request, (maybe pair them with dictionary on join?, or ip/port)
+            //TODO find out how to find serverclient on appserver request, (maybe pair them with dictionary on join?(<(ip,port),(ip,port)> of tcpServer, appserver, maybe make client send unique id based on something), or ip/port, client.name)
             //TODO block this so it doesnt exit
+            //TODO replace CW's with propper logging
         }
 
         private static void OnProcessExit(object? sender, EventArgs e)
