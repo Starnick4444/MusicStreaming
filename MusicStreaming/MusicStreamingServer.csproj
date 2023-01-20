@@ -23,4 +23,8 @@
     <None Include="D:\Coding\C#\MusicStreaming\MusicStreaming\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeArtEng.Tcp\CodeArtEng.Tcp\CodeArtEng.Tcp.csproj" />
+  </ItemGroup>
+
 </Project>

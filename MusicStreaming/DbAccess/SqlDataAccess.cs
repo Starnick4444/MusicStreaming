@@ -29,7 +29,7 @@ public class SqlDataAccess : ISqlDataAccess
         T parameters,
         string connectionId = "Default")
     {
-        using IDbConnection connection = new SqlConnection("_config.GetConnectionString(connectionId)");
+        using IDbConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[connectionId].ConnectionString);
 
         await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
     }
