@@ -7,13 +7,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace MusicStreamingServer;
 
 internal class MusicMapper
 {
+    private static readonly string[] ValidAudioExtensions = { ".mp3", ".aac" };
     private static MusicModel map(string path) => new MusicModel(new FileInfo(path));
 
+    public static async void RegisterNewAudio(string path)
+    {
+        string newFolder = Path.Combine(path, "new");
+
+        if (!Directory.Exists(newFolder))
+        {
+            throw new DirectoryNotFoundException();
+        }
+        //get all file list as fileinfo
+        IEnumerable<FileInfo?> newFiles = new DirectoryInfo(newFolder).GetFiles().Where(f => ValidAudioExtensions.Contains(f.Extension));
+
+        //adding them to database
+        MusicData data = new MusicData(new SqlDataAccess());
+        XmlSerializer serializer = new XmlSerializer(typeof(MusicModel));
+        foreach (FileInfo? file in newFiles)
+        {
+            MusicModel model = new MusicModel(file);
+            int id = data.InsertMusic(model).Result;
+            File.Move(file.FullName, Path.Combine(path, id + file.Extension));
+
+            //creating an xml file with the same name
+            using (var writer = new StreamWriter(Path.Combine(path, id + ".xml")))
+            {
+                serializer.Serialize(writer, model);
+            }
+        }
+
+    }
     public static async void MapFolder(string path)
     {
         MusicData data = new MusicData(new SqlDataAccess());
@@ -21,7 +51,6 @@ internal class MusicMapper
         IEnumerable<string> localTitles = Directory.GetFiles(path).Select(a => a = Path.GetFileNameWithoutExtension(a));
         IEnumerable<string> OnlyInDB = dbTitles.Except(localTitles);
         IEnumerable<string> OnlyOnLocal = localTitles.Except(dbTitles);
-
         //TODO only select specified file extensions, e.g. .mp3
 
         if (OnlyInDB.Count() > 0)

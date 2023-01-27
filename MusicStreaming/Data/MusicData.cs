@@ -3,6 +3,7 @@ using MusicStreamingServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,11 @@ internal class MusicData : IMusicData
         return result.FirstOrDefault();
     }
 
-    public Task InsertMusic(MusicModel music) => _db.SaveData("dbo.spMusic_Insert", music);
+    public async Task<int> InsertMusic(MusicModel music)
+    {
+        var result = await _db.LoadData<int, MusicModel>("dbo.spMusic_Insert", music);
+        return result.FirstOrDefault();
+    }
 
     public Task UpdateMusic(MusicModel music) => _db.SaveData("dbo.spMusic_Update", music);
 

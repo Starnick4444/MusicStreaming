@@ -21,17 +21,9 @@ internal class Program
         //MusicMapper.MapFolder(@"");
 
         //initializing Tcp server
-        Server = TcpServerManager.StartServer();
+        Server = TcpServerManager.StartServer(10001);
 
-        //CONCLUSION: TCPAPPSERVER HAS TCPSERVER BUILT IN, just use that to stream data, NOT GOOOD
-        //can only send data trough sender.appclient.connection after we sent tcpapp response
-
-        //initializing TcpApp server
-        //AppServer = TcpAppServerManager.StartServer();
         Console.ReadLine();
-        
-        //TODO TEST AppServer.Clients vs AppServer.AppClients, might be able to handle TODO below this with it
-
         //TODO find out how to find serverclient on appserver request, (maybe pair them with dictionary on join?(<(ip,port),(ip,port)> of tcpServer, appserver, maybe make client send unique id based on something), or ip/port, client.name)
         //TODO block this so it doesnt exit
         //TODO replace CW's with propper logging
@@ -39,14 +31,8 @@ internal class Program
 
     private static void OnProcessExit(object? sender, EventArgs e)
     {
-        if (Server is not null)
-        {
-            Server.Stop(); Server.Dispose();
-        }
-
-        if (AppServer is not null)
-        {
-            AppServer.Stop(); AppServer.Dispose();
-        }
+        Server?.Stop(); Server?.Dispose();
+        AppServer?.Stop(); AppServer?.Dispose();
+        
     }
 }

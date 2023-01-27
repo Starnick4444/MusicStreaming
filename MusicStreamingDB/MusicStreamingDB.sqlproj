@@ -65,8 +65,11 @@
     <Build Include="dbo\StoredProcedures\spMusic_GetAllTitle.sql" />
     <Build Include="dbo\StoredProcedures\spMusic_Insert.sql" />
     <Build Include="dbo\StoredProcedures\spMusic_GetAll.sql" />
-    <Build Include="dbo\StoredProcedures\spMusic_Get.sql" />
+    <Build Include="dbo\StoredProcedures\spMusic_GetByTitle.sql" />
     <Build Include="dbo\StoredProcedures\spMusic_Delete.sql" />
     <Build Include="dbo\StoredProcedures\spMusic_Update.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="MusicStreamingDB.refactorlog" />
   </ItemGroup>
 </Project>

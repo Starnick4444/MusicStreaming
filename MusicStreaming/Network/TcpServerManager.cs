@@ -11,14 +11,14 @@ namespace MusicStreamingServer.Network;
 public static class TcpServerManager
 {
     private static TcpServer _server;
-    public static TcpServer StartServer()
+    public static TcpServer StartServer(int port)
     {
         _server = new TcpServer("MusicServer");
         _server.MaxClients = 10;
         _server.ClientConnected += Server_ClientConnected;
         _server.ClientDisconnected += Server_ClientDisconnected;
         //TODO start with a port
-        _server.Start(10001);
+        _server.Start(port);
         return _server;
     }
 
@@ -54,8 +54,8 @@ public static class TcpServerManager
     {
         Console.WriteLine("Bytes recieved!");
         string data = Encoding.UTF8.GetString(e.Data);
-        Encoding.UTF8.
         Console.WriteLine(data); ;
+        e.Client
         //throw new NotImplementedException();
     }
 

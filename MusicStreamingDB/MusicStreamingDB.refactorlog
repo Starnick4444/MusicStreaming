@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="bf194d3f-d658-44d6-b61b-09d34bde6302" ChangeDateTime="01/26/2023 21:22:30">
+    <Property Name="ElementName" Value="[dbo].[spMusic_Get]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[spMusic_GetByTitle]" />
+  </Operation>
+</Operations>
