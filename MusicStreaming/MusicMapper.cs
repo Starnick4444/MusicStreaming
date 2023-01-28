@@ -30,10 +30,11 @@ internal class MusicMapper
         //adding them to database
         MusicData data = new MusicData(new SqlDataAccess());
         XmlSerializer serializer = new XmlSerializer(typeof(MusicModel));
+        int id = 0;
         foreach (FileInfo? file in newFiles)
         {
             MusicModel model = new MusicModel(file);
-            int id = data.InsertMusic(model).Result;
+            //int id = await data.InsertMusic(model);
             File.Move(file.FullName, Path.Combine(path, id + file.Extension));
 
             //creating an xml file with the same name
@@ -41,6 +42,7 @@ internal class MusicMapper
             {
                 serializer.Serialize(writer, model);
             }
+            id += 1;
         }
 
     }

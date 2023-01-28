@@ -12,15 +12,16 @@ namespace MusicStreamingServer.Models;
 //it will contain the audio file's extension, description, title, length
 [Serializable]
 [XmlRoot("MusicDetails")]
-internal class MusicModel
+public class MusicModel
 {
     //public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public string Extension { get; set; }
+    public int Duration { get; set; } = 0; //gotta set it in constructor for serialization
+
     [XmlIgnore]
     private TimeSpan timeSpan;
-    public int Duration => Convert.ToInt32(timeSpan.TotalSeconds);
 
     public MusicModel(FileInfo fileInfo)
     {
@@ -32,10 +33,15 @@ internal class MusicModel
         //this.timeSpan = reader.TotalTime;
     }
 
+    public MusicModel()
+    {
+
+    }
+
     public MusicModel(string title, string path, string description, string extension)
     {
         Title = title;
-        Path = path;
+        //Path = path;
         Description = description;
         Extension = extension;
     }

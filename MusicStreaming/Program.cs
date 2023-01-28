@@ -18,10 +18,10 @@ internal class Program
         AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
         //ClientRequest.clientRequests.OnAdd += ClientRequest.ClientRequests_OnAdd;
         //Local list of available music, TODO REMOVE THIS, use database
-        //MusicMapper.MapFolder(@"");
-
+        MusicMapper.RegisterNewAudio(AppDomain.CurrentDomain.BaseDirectory);
+        
         //initializing Tcp server
-        Server = TcpServerManager.StartServer(10001);
+        //Server = TcpServerManager.StartServer(10001);
 
         Console.ReadLine();
         //TODO find out how to find serverclient on appserver request, (maybe pair them with dictionary on join?(<(ip,port),(ip,port)> of tcpServer, appserver, maybe make client send unique id based on something), or ip/port, client.name)

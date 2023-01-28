@@ -55,7 +55,7 @@ public static class TcpServerManager
         Console.WriteLine("Bytes recieved!");
         string data = Encoding.UTF8.GetString(e.Data);
         Console.WriteLine(data); ;
-        e.Client
+        //e.Client
         //throw new NotImplementedException();
     }
 
